@@ -5,7 +5,7 @@ import Users from './containers/Users/Users'
 const App = () => (
   <Fragment>
     <GlobalStyle />
-    <Users query={`location:"Kharkiv" sort:followers-desc`} numberOfUsers={10} />
+    <Users query={`location:"Kharkiv, Ukraine" sort:followers-desc`} numberOfUsers={10} />
   </Fragment>
 )
 

@@ -40,13 +40,13 @@ const NoUsers = styled.h1`
   color: blue;
 `
 
-const Users = props => {
+const Users = ({query, numberOfUsers}) => {
   const { loading, error, data } = useQuery(
     USERS,
     {
       variables: {
-        query: props.query,
-        first: props.numberOfUsers,
+        query: query,
+        first: numberOfUsers,
       },
     },
     {
@@ -67,8 +67,10 @@ const Users = props => {
   }
 
   if (data) {
-    return data.search.nodes.map(user => {
-      const userReposStarsArr = user.repositories.nodes.map(repo => repo.stargazers.totalCount)
+    return data.search.nodes.map(({id, repositories, ...rest}) => {
+
+      const userReposStarsArr = repositories.nodes.map(({stargazers}) => stargazers.totalCount)
+
       const userReposStarsCount = userReposStarsArr.reduce(
         (accStars, curStars) => accStars + curStars,
         0
@@ -76,15 +78,9 @@ const Users = props => {
 
       return (
         <User
-          key={user.id}
-          login={user.login}
-          name={user.name}
-          bio={user.bio}
-          location={user.location}
-          email={user.email}
-          html_url={user.url}
-          avatar_url={user.avatarUrl}
+          key={id}
           stars={userReposStarsCount}
+          {...rest}
         />
       )
     })

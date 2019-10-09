@@ -53,30 +53,30 @@ const UserBIO = styled.p`
   font-size: 18px;
 `
 
-const User = props => {
-  const Usermail = props.email ? props.email : 'No public email'
+const User = ({login, name, bio, location, email, url, avatarUrl, stars}) => {
+  const Usermail = email ? email : 'No public email'
 
   return (
     <StyledUser>
-      <IMG src={props.avatar_url} alt="avatar" height="80px" width="80px" margin="5px" />
+      <IMG src={avatarUrl} alt="avatar" height="80px" width="80px" margin="5px" />
       <Wrapper>
         <UserInfo>
-          <Link href={props.html_url} target="_blank" rel="noopener noreferrer">
-            {props.login}
+          <Link href={url} target="_blank" rel="noopener noreferrer">
+            {login}
           </Link>
-          <UserName>&ensp;{props.name}</UserName>
-          <UserBIO>{props.bio}</UserBIO>
+          <UserName>&ensp;{name}</UserName>
+          <UserBIO>{bio}</UserBIO>
         </UserInfo>
         <Footer>
           <IMG src={loc_pin} alt="location" height="20px" width="20px" margin="0px" />
-          {props.location} &ensp;
+          {location} &ensp;
           <IMG src={mail_pin} alt="mail" height="20px" width="20px" margin="0px" />
           &nbsp;
           {Usermail}
           &ensp;
           <IMG src={star_pin} alt="star" height="20px" width="20px" margin="0px" />
           &nbsp;
-          {props.stars}
+          {stars}
         </Footer>
       </Wrapper>
     </StyledUser>
